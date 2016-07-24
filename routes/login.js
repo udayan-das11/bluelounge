@@ -3,19 +3,25 @@ var router = express.Router();
 var db = require('./db');
 
 router.post('/logindata',function(req,res){
+  var flag=0;
   var username=req.body.username;
   var password=req.body.password;
   //console.log(username);
   var userDetails = {};
-  db.query("select username,password from userdetails WHERE username = ? and password = ?",[username,password], function(err, rows){
-	userDetails.data = rows;
-	if(userDetails.data.length < 1){
-		console.log("Invalid user");
-		res.send("fail");
-	}else{
-		console.log("Valid user!");
-		res.send("success");
-	}
- });	
+  var query = db.query("select username,password from userdetails WHERE username = $1 and password = $2",[username,password]);
+  query.on('row', function(row) {
+    console.log(row);
+	userDetails.data = row;
+    flag=1;	
+  });
+  query.on("end", function (result) {
+    	if(flag==0){
+			console.log("Invalid creds");
+			res.end("fail");
+		} else {
+            console.log("Valid creds!");
+			res.end("success");
+		}
+	});
 });
 module.exports = router;
