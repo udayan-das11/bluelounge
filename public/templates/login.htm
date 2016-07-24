@@ -1,0 +1,19 @@
+<div class="loader" ng-show="loader">
+		<div class="loaderImg"></div>
+</div>
+<div id="login">
+	<div class="main-form">
+		<p>Login</p>
+		<input type="text" placeholder="Username" value="" ng-model="username">
+		<input type="password" placeholder="Password" value="" ng-model="password">
+		<label>
+			<input type="checkbox"> Remember me
+		</label>
+		<input type="submit" value="Sign in" ng-click="loginAuth()">
+		<a href="" title="" ng-click="showPage('frgtpwd')">Forgot your password?</a>
+		<div>
+			<a href="" title="">Don't have an account?</a>
+			<a href="" title="" ng-click="showPage('signup')">Sign Up</a>
+		</div>
+	</div>
+</div>

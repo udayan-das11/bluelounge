@@ -1,0 +1,306 @@
+/*==========Default settings css start============*/
+body, html {
+	height: 100%;
+	width: 100%;
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: 700;
+}
+/*==========Default settings css end============*/
+/*========nav bar css start===============*/
+.navbar .container .navbar-header .navbar-brand #logo{
+	width: 180px;
+	position: relative;
+}
+@media (max-width: 270px){
+	.navbar .container .navbar-header .navbar-brand #logo{
+		width: 150px;
+	}
+}
+@media (max-width: 240px){
+	.navbar .container .navbar-header .navbar-brand #logo{
+		width: 120px;
+	}
+}
+/*========nav bar css end===============*/
+
+/*===========Default page css start=================*/
+.mainContainer{
+	padding-top: 50px;
+	width: 100%;
+	height: 650px;
+	/*overflow: hidden;*/
+	background: url(../images/intro-bg.jpg) no-repeat center center;
+	background-size: cover;
+}
+.intro-header {
+	width: 100%;
+	height: 600px;
+	padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+	padding-bottom: 50px;
+	color: #f8f8f8;
+	/*background: url(../img/intro-bg.jpg) no-repeat center center;
+	background-size: cover;*/
+	text-align: center;
+}
+
+.intro-message {
+	position: relative;
+	padding-top: 20%;
+	padding-bottom: 20%;
+}
+
+.intro-message > h1 {
+	margin: 0;
+	font-size: 5em;
+	text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.intro-divider {
+	width: 400px;
+	border-top: 1px solid #f8f8f8;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.intro-message > h3 {
+	text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 767px) {
+	.intro-message {
+		padding-bottom: 15%;
+	}
+
+	.intro-message > h1 {
+		font-size: 3em;
+	}
+
+	.intro-divider {
+		width: 100%;
+	}
+}
+/*===========Default page css end=================*/
+
+/*==============login page css start===============*/
+*{
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  box-sizing:border-box;
+}
+#login,#forgotPswd,#registration{
+  padding: 1px;
+  /*background:#a9b89e;*/
+  /*background-color: #E5E5E5;*/
+  font-family:Arial;
+  font-size:12px;
+  color:#151719;
+  margin-top: -50px;
+}
+input[type="text"],
+input[type="password"]{
+  background:transparent;
+  font-weight:bold;
+  padding:10px;
+  border-radius:3px;
+  width:100%;
+  margin:5px 0;
+  outline:medium none;
+  color:#151718;
+  border:1px solid #838388;
+  
+}
+input[type="checkbox"]{
+  -webkit-appearance:none;
+  width:10px;
+  height:10px;
+  position:relative;
+  outline:medium none;
+  margin-right:10px;
+}
+input[type="checkbox"]::before{
+  width:9px;
+  height:9px;
+  content:"";
+  display:block;
+  border:3px solid #C4BCB0;
+  border-radius: 9px;
+  position:absolute;
+}
+input[type="checkbox"]:checked::after{
+  width:5px;
+  height:5px;
+  content:"";
+  display:block;
+  background: #C4BCB0;
+  border-radius: 5px;
+  position:absolute;
+  left:5px;
+  top:5px;
+}
+input[type="submit"]{
+  display:block;
+  padding:10px;
+  /*background:Skyblue;*/
+  border:2px solid #52b6ec;
+  border-radius:3px;
+  font-weight:bold;
+  width:100%;
+  color:#52b6ec;
+  cursor:pointer;
+  -webkit-transition:all 0.3s;
+  -moz-transition:all 0.3s;
+  transition:all 0.3s;
+}
+input[type="submit"]:hover{
+  background:#52b6ec;
+  color:#fff;
+}
+.main-form{
+  width:350px;
+  margin: 110px auto;
+  padding:50px;
+  border: 1px solid rgba(0,0,0,0.1);
+  -webkit-box-shadow:0 1px 2px rgba(0,0,0,0.2);
+  background:#F8F8F8;
+}
+.main-form p{
+	text-align: center;
+	font-size: 25px;
+	font-weight: bold;
+}
+.main-form > label{
+  display:block;
+  margin:10px 0 15px;
+  line-height:15px;
+  cursor:pointer;
+}
+.main-form > div{
+  margin-top:20px;
+}
+a{
+  color:#151718;
+  text-decoration:none;
+}
+.main-form > a{
+  font-size:11px;
+  display:block;
+  text-align:center;
+  margin:10px 0;
+}
+.main-form > div >a:first-child{
+  font-weight:bold;
+}
+.main-form > div >a:nth-child(2){
+  border:2px solid #3DA087;
+  display:inline-block;
+  border-radius:3px;
+  color:#3DA087;
+  font-weight:bold;
+  padding:7px 15px;
+  margin-left:28px;
+  -webkit-transition:all 0.3s;
+  -moz-transition:all 0.3s;
+  transition:all 0.3s;
+}
+.main-form > div >a:nth-child(2):hover{
+  background:#3DA087;
+  color:#fff;
+}
+/*==============login page css end=================*/
+/*=============forgot password css start============*/
+/*Forgot Password CSS*/
+#forgotPswd .main-form > label{
+	font-weight:bold;
+}
+#forgotPswd .main-form > div >a:first-child{
+  border:2px solid #3DA087;
+  display:inline-block;
+  border-radius:3px;
+  color:#3DA087;
+  font-weight:bold;
+  padding:7px 15px;
+  margin-left:186px;
+  -webkit-transition:all 0.3s;
+  -moz-transition:all 0.3s;
+  transition:all 0.3s;
+}
+#forgotPswd .main-form > div >a:first-child:hover{
+  background:#3DA087;
+  color:#fff;
+}
+#forgotPswd .main-form > a{
+  font-size:11px;
+  display:block;
+  text-align:center;
+  margin:10px 0;
+}
+/*=============forgot password css end ==============*/
+/*==============products css start==================*/
+#products{
+    color: #fff;
+    position: absolute;
+    top:25%;
+    left:0px;
+    right: 0px;
+    bottom: 0px;
+    margin: auto;
+    text-align: center;
+}
+#products h1{
+  font-size: 60px;
+}
+/*==========footer css start====================*/
+footer {
+	background-color: #f8f8f8;
+	padding: 50px 0;
+}
+
+p.copyright {
+	margin: 15px 0 0;
+}
+/*==========footer css end====================*/
+
+/*==========Admin Panel css start=============*/
+#adminPanel{
+  padding: 0px;
+  margin-top: -19px;
+  height: 600px;
+  background-color: #ccc;
+}
+#allVendorsBtn, #allProductsBtn{
+  text-align: right;
+}
+.searchBox {
+  text-align: right;
+  margin: 10px;
+}
+.loader{
+  width: 100%;
+  height: 691px;
+  background: rgba(195, 195, 162,0.6);
+  z-index: 1;
+  position: absolute;
+  left: 0px;
+  top:-40px;
+}
+.loaderImg{
+  background: url(../images/gears.gif) no-repeat;
+  position: absolute;top: 90px;right: 0px;bottom: 0px;left: 0px;
+  margin: auto;
+  z-index: 10;
+  width: 150px;
+  height: 150px;
+}
+.Vcancel{
+  padding-left:140px; 
+}
+.Pcancel{
+  padding-left:140px; 
+}
+/*#addProbuctsBtn{
+  position: absolute;
+  right: 365px;
+}*/
+/*==========Admin Panel css end===============*/

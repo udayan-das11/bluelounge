@@ -1,0 +1,17 @@
+<div class="loader" ng-show="loader">
+		<div class="loaderImg"></div>
+</div>
+<div id="registration">
+	<div class="main-form">
+		<p>Registration</p>
+		<input type="text" placeholder="Email" value="" ng-model="email">
+		<input type="text" placeholder="Username" value="" ng-model="username">
+		<input type="password" placeholder="Password" value="" ng-model="password">
+		<input type="password" placeholder="Conform Password" value="" ng-model="cPawword">
+		<input type="text" placeholder="Phone Number" value="" ng-model="phoneNumber">
+		<label>
+			<input type="checkbox">Accept T&C*
+		</label>	
+		<input type="submit" value="Sign Up" ng-click="SubmitUserData()">
+	</div>	
+</div>

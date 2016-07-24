@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>BlueLounge</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/lib/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/lib/sweet-alert.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/lib/jquery-ui.css">
+
+    <!-- Custom Google Web Font -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Add custom CSS here -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/landing-page.css">
+
+    <!-- JavaScript -->
+    <script type="text/javascript" src="javascripts/lib/jquery.js"></script>
+    <script type="text/javascript" src="javascripts/lib/jqueryui.js"></script>
+    <script type="text/javascript" src="javascripts/lib/bootstrap.js"></script>
+    <script type="text/javascript" src="javascripts/lib/angular.js"></script>
+    <script type="text/javascript" src="javascripts/lib/route.js"></script>
+    <script type="text/javascript" src="javascripts/lib/sweetAlert.js"></script>
+    <script type="text/javascript" src="javascripts/blueLoungeScript.js"></script>
+
+</head>
+
+<body ng-app="BlueLoungeApp" ng-controller="blueLoungeController">
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" ng-include="headerUrl"></nav>
+
+    <div class="mainContainer" ng-view></div>
+    <footer ng-include="footerUrl"></footer>
+</body>
+
+</html>

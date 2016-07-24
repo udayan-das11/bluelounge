@@ -1,0 +1,268 @@
+<div class="loader" ng-show="loader">
+		<div class="loaderImg"></div>
+</div>
+<div id="adminPanel">
+	<h2>Hi <span ng-bind="loggedAdmin"></span></h2>
+	<div class="dashBoardContainer">
+		<ul>
+			<li>
+				<a href="#vendorTab">Vendor</a>
+			</li>
+			<li>
+				<a href="#productsTab" ng-click="GetVendor()">Products</a>
+			</li>
+		</ul>
+		<div id="vendorTab">
+			<div class="vendorContainer" ng-show="addVendor">
+			    <div id="allVendorsBtn"><button type="button" class="btn btn-primary" ng-click="ShowVendor()">View all vendors</button></div>
+				<form class="form-horizontal">
+					  <div class="form-group">
+					    <label  class="col-sm-2 control-label">Vendor ID</label>
+					    <div class="col-sm-6">
+					      <input type="text" class="form-control" placeholder="Vendor ID" ng-model="vendorID">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label  class="col-sm-2 control-label">Vendor Name</label>
+					    <div class="col-sm-6">
+					      <input type="text" class="form-control" placeholder="Vendor Name" ng-model="vendorName">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label  class="col-sm-2 control-label">Vendor Location</label>
+					    <div class="col-sm-6">
+					      <input type="text" class="form-control"  placeholder="Vendor Location" ng-model="vendorLoc">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <div class="col-sm-7">
+					    </div>
+					    <div class="col-sm-2"><button type="button" class="btn btn-success" ng-click="InsertVendor()">Add</button></div>
+					  </div>
+				</form>
+			</div>
+
+			<div class="editVendorContainer" ng-show="editVendor">
+			    <div id="allVendorsBtn"><button type="button" class="btn btn-primary" ng-click="ShowVendor()">View all vendors</button></div>
+				<form class="form-horizontal">
+					  <div class="form-group">
+					    <label  class="col-sm-2 control-label">Vendor ID</label>
+					    <div class="col-sm-6">
+					      <input type="text" class="form-control" ng-model="EditvendorID" disabled="disabled">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label  class="col-sm-2 control-label">Vendor Name</label>
+					    <div class="col-sm-6">
+					      <input type="text" class="form-control" ng-model="EditvendorName">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label  class="col-sm-2 control-label">Vendor Location</label>
+					    <div class="col-sm-6">
+					      <input type="text" class="form-control" ng-model="EditvendorLoc">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <div class="col-sm-5">
+					    </div>
+					    <div class="col-sm-2 Vcancel">
+					    <button type="button" class="btn btn-default" ng-click="Back()">Cancel</button>
+					    </div>
+					    <div class="col-sm-2"><button type="button" class="btn btn-success" ng-click="SaveEditVendor(EditvendorID)">Save Changes</button></div>
+					  </div>
+				</form>
+			</div>
+
+			<div class="AllVendorDetails" ng-show="allVendors">
+				<button type="button" class="btn btn-warning" ng-click="Back()">Back</button>
+				<div class="searchBox">
+					<input type="text" ng-model="searchVendor" placeholder="Enter text to search below table">
+				</div>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Vendor ID</th>
+							<th>Vendor Name</th>
+							<th>Vendor Location</th>
+						</tr>
+						<tr ng-repeat="vendor in vendorData | filter:searchVendor ">
+							<td>{{vendor.vid}}</td>
+							<td>{{vendor.vname | uppercase}}</td>
+							<td>{{vendor.vlocation}}</td>
+							<td><button type="button" class="btn btn-warning" title="Edit" ng-click="EditVendor(vendor.vid)"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></td>
+							<td><button type="button" class="btn btn-danger" title="Delete" ng-click="DeleteVendor(vendor.vid)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
+						</tr>
+					</thead>
+				</table>
+			</div>	  	
+		</div>
+		<div id="productsTab">
+			<div class="ProductsContainer" ng-show="addProduct">
+			    <div id="allProductsBtn"><button type="button" class="btn btn-primary" ng-click="ViewAllProducts()">View all Products</button></div>
+				<form class="form-horizontal">
+					  <div class="form-group">
+					    <label  class="col-sm-2 control-label">Product Name</label>
+					    <div class="col-sm-6">
+					      <input type="text" class="form-control" placeholder="Product Name" ng-model="productName">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label  class="col-sm-2 control-label">Product Category</label>
+					    <div class="col-sm-6">
+					      <div class="dropdown">
+								  <select ng-model="productCategory">
+								    <option>--Select Category--</option>
+								  	<option>Men</option>
+								  	<option>Women</option>
+								  	<option>Mobiles</option>
+								  	<option>Laptops</option>
+								  	<option>Accessories</option>
+								  </select>
+							</div>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label  class="col-sm-2 control-label">Product Vendor</label>
+					    <div class="col-sm-6">
+					      <select ng-model="productVendor">
+								<option>--Select Vendor--</option>
+								<option ng-repeat="vendor in vendorData"><span>{{vendor.vname}}</span></option>
+						  </select>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label  class="col-sm-2 control-label">Product Price</label>
+					    <div class="col-sm-6">
+					      <input type="text" class="form-control"  placeholder="Product Price" ng-model="ProductPrice">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label  class="col-sm-2 control-label">Product Manufacture</label>
+					    <div class="col-sm-6">
+					      <input type="text" class="form-control" placeholder="Product Manufacture" ng-model="ProductManufacture">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label  class="col-sm-2 control-label">Product Description</label>
+					    <div class="col-sm-6">
+					      <textarea class="form-control" placeholder="Product Description" ng-model="ProductDescription"></textarea>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label  class="col-sm-2 control-label">Product Image</label>
+					    <div class="col-sm-6">
+					     	<input type="file" fileread="uploadme" id="pImage" class="form-control" />
+    						<img src="" id="Preview"  width="90" style="margin-top:20px;" alt="Image preview...">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <div class="col-sm-7">
+					    </div>
+					    <div class="col-sm-2" id="addProbuctsBtn"><button type="button" class="btn btn-success" ng-click="AddProduct()">AddProduct</button></div>
+					  </div>
+				</form>
+			</div>
+
+			<div class="EditProductsContainer" ng-show="editProduct">
+			    <div id="allProductsBtn"><button type="button" class="btn btn-primary" ng-click="ViewAllProducts()">View all Products</button></div>
+				<form class="form-horizontal">
+					  <div class="form-group">
+					    <label  class="col-sm-2 control-label">Product Name</label>
+					    <div class="col-sm-6">
+					      <input type="text" id="epn" class="form-control" ng-model="editProductName">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label  class="col-sm-2 control-label">Product Category</label>
+					    <div class="col-sm-6">
+					      <div class="dropdown">
+								  <select ng-model="editProductCategory">
+								    <option>--Select Category--</option>
+								  	<option>Men</option>
+								  	<option>Women</option>
+								  	<option>Mobiles</option>
+								  	<option>Laptops</option>
+								  	<option>Accessories</option>
+								  </select>
+							</div>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label  class="col-sm-2 control-label">Product Vendor</label>
+					    <div class="col-sm-6">
+					      <select ng-model="editProductVendor">
+								<option>--Select Vendor--</option>
+								<option ng-repeat="vendor in vendorData"><span>{{vendor.vname}}</span></option>
+						  </select>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label  class="col-sm-2 control-label">Product Price</label>
+					    <div class="col-sm-6">
+					      <input type="text" class="form-control" ng-model="editProductPrice">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label  class="col-sm-2 control-label">Product Manufacture</label>
+					    <div class="col-sm-6">
+					      <input type="text" class="form-control" ng-model="editProductManufacture">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label  class="col-sm-2 control-label">Product Description</label>
+					    <div class="col-sm-6">
+					      <textarea class="form-control" ng-model="editProductDescription"></textarea>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label  class="col-sm-2 control-label">Product Image</label>
+					    <div class="col-sm-6">
+					     	<input type="file" fileread="uploadme" id="editImage" class="form-control" />
+    						<img src="" id="eImg"  width="100" style="margin-top:20px;" alt="Image preview...">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					     <div class="col-sm-5">
+					    </div>
+					    <div class="col-sm-2 Pcancel">
+					    <button type="button" class="btn btn-default" ng-click="BackProducts()">Cancel</button>
+					    </div>
+					    <div class="col-sm-2" id="addProbuctsBtn"><button type="button" class="btn btn-success" ng-click="SaveEditProduct(epid)">Save Changes</button></div>
+					  </div>
+				</form>
+			</div>
+
+			<div class="allProductsContainer" ng-show="allProducts">
+				<button type="button" class="btn btn-warning" ng-click="BackProducts()">Back</button>
+				<div class="searchBox">
+					<input type="text" ng-model="searchProducts" placeholder="Enter text to search below table">
+				</div>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Product Name</th>
+							<th>Catergory</th>
+							<th>Vendor</th>
+							<th>Price</th>
+							<th>Manufacture</th>
+							<th>Description</th>
+							<th>Image</th>
+						</tr>
+						<tr ng-repeat="products in productsData | filter:searchProducts">
+							<td>{{products.productname | uppercase}}</td>
+							<td>{{products.productcategory}}</td>
+							<td>{{products.productvendor}}</td>
+							<td>{{products.productprice}}</td>
+							<td>{{products.productmanufacture}}</td>
+							<td>{{products.productdescription}}</td>
+							<td><img src="{{products.productimage}}" style="width:50px" alt="product image"></td>
+							<td><button type="button" class="btn btn-warning" title="Edit" ng-click="EditProduct(products.pid)"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></td>
+							<td><button type="button" class="btn btn-danger" title="Delete" ng-click="DeleteProduct(products.pid)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</div>		
+	</div>
+</div>
