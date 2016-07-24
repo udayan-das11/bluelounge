@@ -3,6 +3,7 @@ var router = express.Router();
 var db = require('./db');
 
 router.post('/signupdata',function(req,res){
+var flag=0;
   var userdata = {
 	  email:req.body.email,
 	  username:req.body.username,
@@ -10,15 +11,14 @@ router.post('/signupdata',function(req,res){
 	  phonenumber:req.body.phoneNumber
 	}
   //console.log(userdata);
-	db.query("INSERT INTO userdetails SET ?",userdata, function(err){
-		if(err){
-			console.log("Insertion failed");
-			res.end("fail");
-		}else{
-			console.log("insertion success");
-			res.end("success");
-		}
-	});	
+	var query = db.query("INSERT INTO userdetails (email,username,password,phoneinteger)  VALUES ($1,$2,$3,$4)",[userdata.email,userdata.username,userdata.password,userdata.phonenumber]);
+	query.on('row', function(row){
+		flag=1;
+	});
+	 query.on("end", function (result) {
+		console.log("insertion success");
+		res.end("success");
+	});
 });
 
 module.exports = router;

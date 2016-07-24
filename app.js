@@ -5,7 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-
 var fs = require("fs");
 
 fs.readFile("foo.txt", "utf8", function(error, data) {
@@ -22,6 +21,7 @@ var productsGetandInsert = require('./routes/productsGetandInsert');
 var editProduct = require('./routes/editProduct');
 var deleteProduct = require('./routes/deleteProduct');
 var editVendor = require('./routes/vendorEdit');
+var userProducts = require('./routes/UserProductsGet');
 
 var app = express();
 
@@ -54,6 +54,7 @@ app.use('/products',productsGetandInsert);
 app.use('/editproduct',editProduct);
 app.use('/deleteproduct',deleteProduct);
 app.use('/editvendor',editVendor);
+app.use('/userProducts',userProducts);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

@@ -136,7 +136,7 @@ blueLoungeApp.controller("loginController",["$scope","$http","$location","$rootS
 		    })
 		    .then(function(data) {
 		    	$scope.loader = false;
-		    	//console.log(data.data);
+		    	//console.log(data.data+"test");
 		          if(data.data == 'success')
 				{
 					$rootScope.loginCheck = true;
@@ -149,7 +149,7 @@ blueLoungeApp.controller("loginController",["$scope","$http","$location","$rootS
 					$location.url("/products");
 
 				}else if(data.data=='fail'){
-					swal("Oops...", "Invalid username and password", "error");
+					swal("Oops...", "Invalid username & password", "error");
 				}  
 		    }, 
 		    function(error) {
@@ -157,6 +157,20 @@ blueLoungeApp.controller("loginController",["$scope","$http","$location","$rootS
 		            swal("Oops...", "Error while communicating with the server", "error");
 		    });
 	}
+}]);
+
+blueLoungeApp.controller("productsController",["$scope","$http","$location","$rootScope",function($scope,$http,$location,$rootScope){
+
+	$scope.getAllProducts = function(){
+		$scope.loader = true;
+		$http.get('/userProducts').success(function (data){
+				console.log(data);
+        		$scope.productsData = data;
+				$scope.loader = false;
+    		});
+	  console.log("hello products");
+	}
+
 }]);
 
 blueLoungeApp.controller("adminLoginController",["$scope","$http","$location","$rootScope",function($scope,$http,$location,$rootScope){
@@ -246,7 +260,11 @@ blueLoungeApp.controller("adminPanelController",["$scope","$http",function($scop
         		var len = $scope.vendorData.length;
         		var height = (len*90+160);
         		height = parseInt(height);
-        		$(".mainContainer").css("height",height);
+				if(height<650){
+					$(".mainContainer").css("height","650px");
+				}else{
+					$(".mainContainer").css("height",height);
+				}
         		//console.log("success");
     		});
 	}
@@ -256,6 +274,7 @@ blueLoungeApp.controller("adminPanelController",["$scope","$http",function($scop
         		$scope.vendorData = data;
         		//console.log("success");
     		});
+		$(".mainContainer").css("height","800px");	
 	}
 
 	$scope.EditVendor = function(vid){
@@ -374,14 +393,14 @@ blueLoungeApp.controller("adminPanelController",["$scope","$http",function($scop
 				console.log(data);
 				if(data=='success')
 				{
-					$scope.productName=null;
-					$scope.productCategory=null;
-					$scope.productVendor=null;
-					$scope.ProductPrice=null;
-					$scope.ProductManufacture=null;
-					$scope.ProductDescription=null;
+					$scope.productName="";
+					$scope.productCategory="";
+					$scope.productVendor="";
+					$scope.ProductPrice="";
+					$scope.ProductManufacture="";
+					$scope.ProductDescription="";
 					$("#pImage").val("");
-					$("Preview").src=null;
+					$("Preview").src = "noImg.jpg";
 					swal({
 						  title: "Product Added Successfully!",
 						  text: "Check the products table",
@@ -404,7 +423,11 @@ blueLoungeApp.controller("adminPanelController",["$scope","$http",function($scop
         		var len = $scope.productsData.length;
         		var height = (len*100+160);
         		height = parseInt(height);
-        		$(".mainContainer").css("height",height);
+        		if(height<650){
+					$(".mainContainer").css("height","650px");
+				}else{
+					$(".mainContainer").css("height",height);
+				}
         		$scope.allProducts = true;
 				$scope.loader = false;
         		//console.log("products render success");
@@ -476,7 +499,8 @@ blueLoungeApp.controller("adminPanelController",["$scope","$http",function($scop
 		$.post("/editproduct/updateProductDataById",$scope.updateProductData, function(data){
 				//console.log(data);
 				if(data=='success')
-				{		
+				{	
+					$("#eImg").src="noImg.jpg";
 					swal({
 						  title: "Product Updated Successfully!",
 						  text: "Check the products table",
@@ -526,43 +550,7 @@ blueLoungeApp.controller("adminPanelController",["$scope","$http",function($scop
 		$scope.allProducts = false;
 		$scope.editProduct = false;
 		$(".mainContainer").css("height","650px");
-	}
-}]);
-
-blueLoungeApp.controller("productsController",["$scope","$http","$location","$rootScope",function($scope,$http,$location,$rootScope){
-	$scope.getAllProducts = function(){
-		$rootScope.userData = {
-			username:$scope.username,
-			password:$scope.password
-		};
-		$scope.loader = true;
-		 $http({
-		        url: '/login/logindata',
-		        method: "POST",
-		        data: $rootScope.userData
-		    })
-		    .then(function(data) {
-		    	$scope.loader = false;
-		    	console.log(data.data);
-		          if(data.data == 'success')
-				{
-					$rootScope.loginCheck = true;
-					$rootScope.loggedUser = $scope.username;
-					console.log($rootScope.loggedUser);
-					// $rootScope.$broadcast("ShowProducts", {});
-					swal("Good job!", "Login Successfull!", "success");
-		  			
-		  			console.log("url changed");
-		  			$rootScope.headerUrl="templates/loginHeader.htm";
-					$location.url("/products");
-
-				}else if(data.data=='fail'){
-					swal("Oops...", "Invalid username and password", "error");
-				}  
-		    }, 
-		    function(error) {
-		    		$scope.loader = false;
-		            swal("Oops...", "Error while communicating with the server", "error");
-		    });
+		$("#eImg").src="noImg.jpg";
+		$("#Preview").src="noImg.jpg";
 	}
 }]);

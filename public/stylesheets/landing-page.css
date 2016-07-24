@@ -1,85 +1,133 @@
 /*==========Default settings css start============*/
 body, html {
-	height: 100%;
-	width: 100%;
+  height: 100%;
+  width: 100%;
 }
 
 body, h1, h2, h3, h4, h5, h6 {
-	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-weight: 700;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
 }
+ul.nav-pills {
+      position: fixed;
+      margin-top: 5%;
+  }
+  div.col-sm-9 div {
+      height: 250px;
+      font-size: 28px;
+  }
+  #section1 {color: currentColor;background-color: floralwhite;border-radius: 11px;padding: 26px;margin-top: 57px;}
+  #section2 {color: #fff; background-color: #673ab7;}
+  #section3 {color: #fff; background-color: #ff9800;}
+  #section41 {color: #fff; background-color: #00bcd4;}
+  #section42 {color: #fff; background-color: #009688;}
+  
+  @media screen and (max-width: 810px) {
+    #section1, #section2, #section3, #section41, #section42  {
+        margin-left: 150px;
+    }
+  }
+  
+.categoryMenu{
+  background: #F8F8F8;
+  width: 20%;
+  height: 85%;
+  position: relative;
+  left: 2%;
+  float: left;
+  border-radius: 10px;
+}
+.categoryMenu ul li{ margin: 1px;float: left;list-style: none; }
+.categoryMenu #pmenu{
+    background: rgba(42,51,20,0.8);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    color: #ffffff;
+    float: left;
+    height: 10%;
+    line-height: 2.5;
+    text-align: center;
+    width: 100%;
+    font-size: 130%;
+}
+.categoryMenu button{
+  width: 185px;
+  height: 35px;
+  margin: 5px;
+}
+.productDisplay{background: #F8F8F8;width: 74%;height: 85%;position: relative;left: 4%;float: left;border-radius: 9px;}
 /*==========Default settings css end============*/
 /*========nav bar css start===============*/
 .navbar .container .navbar-header .navbar-brand #logo{
-	width: 180px;
-	position: relative;
+  width: 180px;
+  position: relative;
 }
 @media (max-width: 270px){
-	.navbar .container .navbar-header .navbar-brand #logo{
-		width: 150px;
-	}
+  .navbar .container .navbar-header .navbar-brand #logo{
+    width: 150px;
+  }
 }
 @media (max-width: 240px){
-	.navbar .container .navbar-header .navbar-brand #logo{
-		width: 120px;
-	}
+  .navbar .container .navbar-header .navbar-brand #logo{
+    width: 120px;
+  }
 }
 /*========nav bar css end===============*/
 
 /*===========Default page css start=================*/
 .mainContainer{
-	padding-top: 50px;
-	width: 100%;
-	height: 650px;
-	/*overflow: hidden;*/
-	background: url(../images/intro-bg.jpg) no-repeat center center;
-	background-size: cover;
+  padding-top: 50px;
+  width: 100%;
+  height: 850px;
+  /*overflow: hidden;*/
+  background: url(../images/intro-bg.jpg) no-repeat center center;
+  background-size: cover;
 }
 .intro-header {
-	width: 100%;
-	height: 600px;
-	padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
-	padding-bottom: 50px;
-	color: #f8f8f8;
-	/*background: url(../img/intro-bg.jpg) no-repeat center center;
-	background-size: cover;*/
-	text-align: center;
+  width: 100%;
+  height: 600px;
+  padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+  padding-bottom: 50px;
+  color: #f8f8f8;
+  /*background: url(../img/intro-bg.jpg) no-repeat center center;
+  background-size: cover;*/
+  text-align: center;
 }
 
 .intro-message {
-	position: relative;
-	padding-top: 20%;
-	padding-bottom: 20%;
+  position: relative;
+  padding-top: 20%;
+  padding-bottom: 20%;
 }
 
 .intro-message > h1 {
-	margin: 0;
-	font-size: 5em;
-	text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+  margin: 0;
+  font-size: 5em;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
 }
 
 .intro-divider {
-	width: 400px;
-	border-top: 1px solid #f8f8f8;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  width: 400px;
+  border-top: 1px solid #f8f8f8;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .intro-message > h3 {
-	text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
 }
 
 @media (max-width: 767px) {
-	.intro-message {
-		padding-bottom: 15%;
-	}
+  .intro-message {
+    padding-bottom: 15%;
+  }
 
-	.intro-message > h1 {
-		font-size: 3em;
-	}
+  .intro-message > h1 {
+    font-size: 3em;
+  }
 
-	.intro-divider {
-		width: 100%;
-	}
+  .intro-divider {
+    width: 100%;
+  }
 }
 /*===========Default page css end=================*/
 
@@ -166,9 +214,9 @@ input[type="submit"]:hover{
   background:#F8F8F8;
 }
 .main-form p{
-	text-align: center;
-	font-size: 25px;
-	font-weight: bold;
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
 }
 .main-form > label{
   display:block;
@@ -212,7 +260,7 @@ a{
 /*=============forgot password css start============*/
 /*Forgot Password CSS*/
 #forgotPswd .main-form > label{
-	font-weight:bold;
+  font-weight:bold;
 }
 #forgotPswd .main-form > div >a:first-child{
   border:2px solid #3DA087;
@@ -241,24 +289,24 @@ a{
 #products{
     color: #fff;
     position: absolute;
-    top:25%;
+    top: 8%;
     left:0px;
     right: 0px;
     bottom: 0px;
     margin: auto;
-    text-align: center;
+    text-align: left;
 }
 #products h1{
   font-size: 60px;
 }
 /*==========footer css start====================*/
 footer {
-	background-color: #f8f8f8;
-	padding: 50px 0;
+  background-color: #f8f8f8;
+  padding: 50px 0;
 }
 
 p.copyright {
-	margin: 15px 0 0;
+  margin: 15px 0 0;
 }
 /*==========footer css end====================*/
 
@@ -285,6 +333,14 @@ p.copyright {
   left: 0px;
   top:-40px;
 }
+/*.row {
+    margin-right: -15px;
+    margin-left: -15px;
+    margin-top: 93px;
+    background: gainsboro;
+    border-radius: 14px;
+    height: 399px;
+}*/
 .loaderImg{
   background: url(../images/gears.gif) no-repeat;
   position: absolute;top: 90px;right: 0px;bottom: 0px;left: 0px;

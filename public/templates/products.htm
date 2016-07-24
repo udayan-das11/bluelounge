@@ -1,7 +1,23 @@
 <!-- <div class="loader" ng-show="loader">
 		<div class="loaderImg"></div>
 </div> -->
-<div id="products">
-	<h3>Hello <span ng-bind="loggedUser"></span></h3>
-	<h1>Products Comming Soon..............</h1>
+
+<div class="userProductsContainer" ng-init="getAllProducts()">
+	<div id="products">
+		<h3>Hello <span ng-bind="loggedUser"></span></h3>
+     <div class="categoryMenu">
+     	<p id="pmenu">Products Category</p>
+     	<ul>
+     		<li><button type="button" class="btn btn-default" title="Men">Men</button></li>
+     		<li><button type="button" class="btn btn-default" title="Women">Women</button></li>
+			<li><button type="button" class="btn btn-default" title="Mobile">Mobile</button></li>
+			<li><button type="button" class="btn btn-default" title="Laptops">Laptops</button></li>
+			<li><button type="button" class="btn btn-default" title="Accessories">Accessories</button></li>
+		</ul>
+     </div>
+     <div class="productDisplay"></div>
+
+
+	 </div>
+	<div class="categoryProducts"></div>
 </div>
