@@ -161,6 +161,7 @@ blueLoungeApp.controller("loginController",["$scope","$http","$location","$rootS
 
 
 blueLoungeApp.controller("productsController",["$scope","$http","$location","$rootScope",function($scope,$http,$location,$rootScope){
+	$scope.productsData="";
 	$scope.getAllProducts = function(){
 		$scope.loader = true;
 		$http.get('/userProducts').success(function (data){
@@ -169,6 +170,9 @@ blueLoungeApp.controller("productsController",["$scope","$http","$location","$ro
         		console.log($scope.productsData.length);
         		$scope.showProductDetails($scope.productsData);
 				$scope.loader = false;
+				$scope.categoryMenu = true;
+				$scope.productDisplay = true;
+				$scope.category = false;
     		});
 	}
 
@@ -195,12 +199,88 @@ blueLoungeApp.controller("productsController",["$scope","$http","$location","$ro
 				Tr2.append(Td4);
 				Table.append(Tr2);
 				Data.append(Table);
-				$(".productDisplay").append(Data);
+				$(".UserproductsDetails").append(Data);
 				$scope.details=true;
-				//$scope.paginationFun();
+				$scope.paginationFun(productDetails.length);
 			}
+			$scope.loader = false;
 		}
 	}
+	
+	$scope.paginationFun = function(Items){
+	var show_per_page = 8;
+	var number_of_items = Items;
+	var number_of_pages = Math.ceil(number_of_items/show_per_page);
+
+	$('#current_page').val(0);
+	$('#show_per_page').val(show_per_page);
+
+	var navigation_html = '<span class="previous_link" ng-click="previous()">Prev</span>';
+	var current_link = 0;
+	while(number_of_pages > current_link){
+		navigation_html +=" "+'<span class="page_link" ng-click="go_to_page(' + current_link +')" longdesc="' + current_link +'">'+ (current_link + 1) +'</span>';
+		current_link++;
+	}
+	navigation_html +=" "+'<span class="next_link" href="" ng-click="next()">Next</span>';
+
+	$('#page_navigation').html(navigation_html);
+
+	$('#page_navigation .page_link:first').addClass('active_page');
+
+	$('.UserproductsDetails').children().css('display', 'none');
+
+	$('.UserproductsDetails').children().slice(0, show_per_page).css('display', 'block');
+	$("#pageCount").show();
+	$("#display").hide();
+ }
+	$scope.previous = function(){
+		$scope.new_page = parseInt($('#current_page').val()) - 1;
+		if($('.active_page').prev('.page_link').length==true){
+			go_to_page($scope.new_page);
+		}
+	}
+
+	$scope.next = function(){
+		$scope.new_page = parseInt($('#current_page').val()) + 1;
+		if($('.active_page').next('.page_link').length==true){
+			go_to_page($scope.new_page);
+		}
+	}
+
+	$scope.go_to_page=function(page_num){
+		
+		$scope.show_per_page = parseInt($('#show_per_page').val());
+		$scope.start_from = page_num * $scope.show_per_page;
+		$scope.end_on = $scope.start_from + $scope.show_per_page;
+		$('.UserproductsDetails').children().css('display', 'none').slice($scope.start_from, $scope.end_on).css('display', 'block');
+		$('.page_link[longdesc=' + page_num +']').addClass('active_page').siblings('.active_page').removeClass('active_page');
+		$('#current_page').val(page_num);
+		$('#pageCount').html("Current Page: "+parseInt(page_num+1));
+	}
+	
+	$scope.ShowCategory = function(category){
+		$scope.productDisplay = false;
+		$scope.category = true;
+		$scope.FilterData = [];
+		$scope.index = 0;
+		$scope.DataErr = false;
+		for(var i=0;i<$scope.productsData.length;i++){
+			if($scope.productsData[i].productcategory == category){
+				$scope.FilterData[$scope.index] = $scope.productsData[i];
+				$scope.index++;
+			}
+		}
+		if($scope.FilterData.length<=0){
+			$scope.DataErr = true;;
+			$scope.NoData="Sorry No Products Available for "+category+" :(";
+		}
+		console.log($scope.FilterData);
+	}
+	$scope.Back = function(){
+		$scope.productDisplay = true;
+		$scope.category = false;
+	}
+	
 }]);
 
 blueLoungeApp.controller("adminLoginController",["$scope","$http","$location","$rootScope",function($scope,$http,$location,$rootScope){

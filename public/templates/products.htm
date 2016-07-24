@@ -1,22 +1,30 @@
-<!-- <div class="loader" ng-show="loader">
+<div class="loader" ng-show="loader">
 		<div class="loaderImg"></div>
-</div> -->
+</div>
 
 <div class="userProductsContainer" ng-init="getAllProducts()">
 	<div id="products">
 		<h3>Hello <span ng-bind="loggedUser"></span></h3>
-     <div class="categoryMenu">
+     <div class="categoryMenu" ng-show="categoryMenu">
      	<p id="pmenu">Products Category</p>
      	<ul>
-     		<li><button type="button" class="btn btn-default" title="Men" ng-click="">Men</button></li>
-     		<li><button type="button" class="btn btn-default" title="Women">Women</button></li>
-			<li><button type="button" class="btn btn-default" title="Mobile">Mobile</button></li>
-			<li><button type="button" class="btn btn-default" title="Laptops">Laptops</button></li>
-			<li><button type="button" class="btn btn-default" title="Accessories">Accessories</button></li>
+     		<li><button type="button" class="btn btn-default" title="Men" ng-click="ShowCategory('Men')">Men</button></li>
+     		<li><button type="button" class="btn btn-default" title="Women" ng-click="ShowCategory('Women')">Women</button></li>
+			<li><button type="button" class="btn btn-default" title="Mobile" ng-click="ShowCategory('Mobiles')">Mobiles</button></li>
+			<li><button type="button" class="btn btn-default" title="Laptops" ng-click="ShowCategory('Laptops')">Laptops</button></li>
+			<li><button type="button" class="btn btn-default" title="Accessories" ng-click="ShowCategory('Accessories')">Accessories</button></li>
 		</ul>
      </div>
-     <div class="productDisplay">
-     	<!-- <div class="pDetails" ng-repeat="pData in productsData">
+     <div class="productDisplay" ng-show="productDisplay">
+		<input type='hidden' id='current_page' />
+		<input type='hidden' id='show_per_page' />
+		<div class="UserproductsDetails"></div>
+		<div id='page_navigation'></div>
+     </div>
+	 <div class="categoryProducts" ng-show="category">
+		<button type="button" class="btn btn-warning" ng-click="Back()">Back</button><br>
+		<p id="DataErr" ng-bind="NoData" ng-show="DataErr"></p>
+		<div class="pDetails" ng-repeat="pData in FilterData">
      		<img src="{{pData.productimage}}" class="userProductImg">
      		<table border="0">
      		<tr>
@@ -28,8 +36,8 @@
      		Price: {{pData.productprice}} Rs</td> <td><button type="button" class="btn btn-info">More..</button></td>
      		</tr>
      		</table>
-     	</div> --> 
-     </div>
+     	</div> 
+		
+	 </div>
 </div>
-	<div class="categoryProducts"></div>
 </div>
