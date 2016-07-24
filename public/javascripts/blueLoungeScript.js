@@ -159,18 +159,48 @@ blueLoungeApp.controller("loginController",["$scope","$http","$location","$rootS
 	}
 }]);
 
-blueLoungeApp.controller("productsController",["$scope","$http","$location","$rootScope",function($scope,$http,$location,$rootScope){
 
+blueLoungeApp.controller("productsController",["$scope","$http","$location","$rootScope",function($scope,$http,$location,$rootScope){
 	$scope.getAllProducts = function(){
 		$scope.loader = true;
 		$http.get('/userProducts').success(function (data){
 				console.log(data);
         		$scope.productsData = data;
+        		console.log($scope.productsData.length);
+        		$scope.showProductDetails($scope.productsData);
 				$scope.loader = false;
     		});
-	  console.log("hello products");
 	}
 
+	$scope.details=false;
+	$scope.showProductDetails = function(productDetails){
+		console.log(productDetails);
+		if($scope.details==false){
+			for (var i = 0; i < productDetails.length; i++) {
+				var Data = $("<div></div>").addClass("pDetails");
+				var imgTag = $("<img/>").addClass("userProductImg").attr("src",productDetails[i].productimage);
+				Data.append(imgTag);
+				var Table = $("<table></table>");
+				var Tr = $("<tr></tr>");
+				var Td1 = $("<td></td>").html(productDetails[i].productname);
+				Tr.append(Td1);
+				var Td2 = $("<td></td>").html();
+				Tr.append(Td2);
+				Table.append(Tr);
+
+				var Tr2 = $("<tr></tr>");
+				var Td3 = $("<td></td>").html("Price: "+productDetails[i].productprice+" Rs");
+				Tr2.append(Td3);
+				var Td4 = $("<td></td>").html("<button type='button' class='btn btn-info'>More..</button>");
+				Tr2.append(Td4);
+				Table.append(Tr2);
+				Data.append(Table);
+				$(".productDisplay").append(Data);
+				$scope.details=true;
+				//$scope.paginationFun();
+			}
+		}
+	}
 }]);
 
 blueLoungeApp.controller("adminLoginController",["$scope","$http","$location","$rootScope",function($scope,$http,$location,$rootScope){

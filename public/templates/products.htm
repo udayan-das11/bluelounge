@@ -8,16 +8,28 @@
      <div class="categoryMenu">
      	<p id="pmenu">Products Category</p>
      	<ul>
-     		<li><button type="button" class="btn btn-default" title="Men">Men</button></li>
+     		<li><button type="button" class="btn btn-default" title="Men" ng-click="">Men</button></li>
      		<li><button type="button" class="btn btn-default" title="Women">Women</button></li>
 			<li><button type="button" class="btn btn-default" title="Mobile">Mobile</button></li>
 			<li><button type="button" class="btn btn-default" title="Laptops">Laptops</button></li>
 			<li><button type="button" class="btn btn-default" title="Accessories">Accessories</button></li>
 		</ul>
      </div>
-     <div class="productDisplay"></div>
-
-
-	 </div>
+     <div class="productDisplay">
+     	<!-- <div class="pDetails" ng-repeat="pData in productsData">
+     		<img src="{{pData.productimage}}" class="userProductImg">
+     		<table border="0">
+     		<tr>
+     		<td>
+     		{{pData.productname}}</td> <td></td>
+     		</tr>
+     		<tr>
+     		<td>
+     		Price: {{pData.productprice}} Rs</td> <td><button type="button" class="btn btn-info">More..</button></td>
+     		</tr>
+     		</table>
+     	</div> --> 
+     </div>
+</div>
 	<div class="categoryProducts"></div>
 </div>
