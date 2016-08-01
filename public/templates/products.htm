@@ -5,6 +5,9 @@
 <div class="userProductsContainer" ng-init="getAllProducts()">
 	<div id="products">
 		<h3>Hello <span ng-bind="loggedUser"></span></h3>
+		<div class="form-group">
+			<input type="text" ng-model="search" class="form-control searhPage" placeholder="Search Products Here...">
+		</div>
      <div class="categoryMenu" ng-show="categoryMenu">
      	<p id="pmenu">Products Category</p>
      	<ul>
@@ -16,16 +19,9 @@
 		</ul>
      </div>
      <div class="productDisplay" ng-show="productDisplay">
-		<input type='hidden' id='current_page' />
-		<input type='hidden' id='show_per_page' />
-		<div class="UserproductsDetails"></div>
-		<div id='page_navigation'></div>
-     </div>
-	 <div class="categoryProducts" ng-show="category">
-		<button type="button" class="btn btn-warning" ng-click="Back()">Back</button><br>
-		<p id="DataErr" ng-bind="NoData" ng-show="DataErr"></p>
-		<div class="pDetails" ng-repeat="pData in FilterData">
-     		<img src="{{pData.productimage}}" class="userProductImg">
+     	<div class="pDetails" dir-paginate="pData in productsData |filter:search|itemsPerPage:8">
+     		<img src="{{pData.productimage}}" class="userProductImg" ng-click="ShowDetails(pData.pid)">
+     		<!-- <img ng-elevate-zoom ng-src="{{pData.productimage}}" zoom-image="{{pData.productimage}}" class="userProductImg"> -->
      		<table border="0">
      		<tr>
      		<td>
@@ -33,10 +29,53 @@
      		</tr>
      		<tr>
      		<td>
-     		Price: {{pData.productprice}} Rs</td> <td><button type="button" class="btn btn-info">More..</button></td>
+     		Price: {{pData.productprice}} Rs</td> <td><button ng-click="ShowDetails(pData.pid)" type="button" class="btn btn-info">More..</button></td>
+     		</tr>
+     		</table>
+     	</div>
+     	<div class="pegCenter">
+     	<dir-pagination-controls
+			max-size="6"
+			direction-links="true"
+			boundary-links="true" >
+		</dir-pagination-controls></div>
+     </div>
+	 <div class="categoryProducts" ng-show="category">
+		<button type="button" class="btn btn-warning" ng-click="Back()">Back</button><br>
+		<p id="DataErr" ng-bind="NoData" ng-show="DataErr"></p>
+		<p id="DataSuccess" ng-show="DataSuccess">Available products for <span ng-bind="ProductCategory"></span>!!</p>
+		<div class="pDetails" dir-paginate="pData in FilterData |filter:search|itemsPerPage:8">
+     		<img src="{{pData.productimage}}" class="userProductImg" ng-click="ShowDetails(pData.pid)">
+     		<table border="0">
+     		<tr>
+     		<td>
+     		{{pData.productname}}</td> <td></td>
+     		</tr>
+     		<tr>
+     		<td>
+     		Price: {{pData.productprice}} Rs</td> <td><button ng-click="ShowDetails(pData.pid)" type="button" class="btn btn-info">More..</button></td>
      		</tr>
      		</table>
      	</div> 
+		<div class="pegCenter">
+     	<dir-pagination-controls
+			max-size="6"
+			direction-links="true"
+			boundary-links="true" >
+		</dir-pagination-controls></div>
+	 </div>
+	 <div class="ProductDetails" ng-show="ProductDetails">
+	 <button type="button" class="btn btn-warning" ng-click="Back()">Back</button><br>
+	 <div class="ProductItemData" ng-repeat="ProductData in ProductItemDetails">
+	 <img ng-elevate-zoom ng-src="{{ProductData.productimage}}" zoom-image="{{ProductData.productimage}}" class="userProductImg"> 
+	 <table border="0">
+     		<tr><td>{{ProductData.productname}}</td> <td></td></tr>
+     		<tr><td>Price: {{ProductData.productprice}} Rs</td><td></td></tr>
+			<tr><td>{{ProductData.productmanufacture}}</td><td></td></tr>
+			<tr><td>{{ProductData.productdescription}}</td><td></td></tr>
+			<tr><td><button type="button" class="btn btn-info">Add to Cart</button></td><td><button type="button" class="btn btn-info">Buy Now</button></td></tr>
+    </table>
+	 </div>
 		
 	 </div>
 </div>

@@ -1,4 +1,4 @@
-var blueLoungeApp=angular.module("BlueLoungeApp", ["ngRoute"]);
+var blueLoungeApp=angular.module("BlueLoungeApp", ["ngRoute","angularUtils.directives.dirPagination"]);
 
 blueLoungeApp.config(function($routeProvider){
 	$routeProvider.when("/products", {
@@ -168,7 +168,6 @@ blueLoungeApp.controller("productsController",["$scope","$http","$location","$ro
 				console.log(data);
         		$scope.productsData = data;
         		console.log($scope.productsData.length);
-        		$scope.showProductDetails($scope.productsData);
 				$scope.loader = false;
 				$scope.categoryMenu = true;
 				$scope.productDisplay = true;
@@ -176,94 +175,31 @@ blueLoungeApp.controller("productsController",["$scope","$http","$location","$ro
     		});
 	}
 
-	$scope.details=false;
-	$scope.showProductDetails = function(productDetails){
-		console.log(productDetails);
-		if($scope.details==false){
-			for (var i = 0; i < productDetails.length; i++) {
-				var Data = $("<div></div>").addClass("pDetails");
-				var imgTag = $("<img/>").addClass("userProductImg").attr("src",productDetails[i].productimage);
-				Data.append(imgTag);
-				var Table = $("<table></table>");
-				var Tr = $("<tr></tr>");
-				var Td1 = $("<td></td>").html(productDetails[i].productname);
-				Tr.append(Td1);
-				var Td2 = $("<td></td>").html();
-				Tr.append(Td2);
-				Table.append(Tr);
-
-				var Tr2 = $("<tr></tr>");
-				var Td3 = $("<td></td>").html("Price: "+productDetails[i].productprice+" Rs");
-				Tr2.append(Td3);
-				var Td4 = $("<td></td>").html("<button type='button' class='btn btn-info'>More..</button>");
-				Tr2.append(Td4);
-				Table.append(Tr2);
-				Data.append(Table);
-				$(".UserproductsDetails").append(Data);
-				$scope.details=true;
-				$scope.paginationFun(productDetails.length);
-			}
-			$scope.loader = false;
-		}
-	}
-	
-	$scope.paginationFun = function(Items){
-	var show_per_page = 8;
-	var number_of_items = Items;
-	var number_of_pages = Math.ceil(number_of_items/show_per_page);
-
-	$('#current_page').val(0);
-	$('#show_per_page').val(show_per_page);
-
-	var navigation_html = '<span class="previous_link" ng-click="previous()">Prev</span>';
-	var current_link = 0;
-	while(number_of_pages > current_link){
-		navigation_html +=" "+'<span class="page_link" ng-click="go_to_page(' + current_link +')" longdesc="' + current_link +'">'+ (current_link + 1) +'</span>';
-		current_link++;
-	}
-	navigation_html +=" "+'<span class="next_link" href="" ng-click="next()">Next</span>';
-
-	$('#page_navigation').html(navigation_html);
-
-	$('#page_navigation .page_link:first').addClass('active_page');
-
-	$('.UserproductsDetails').children().css('display', 'none');
-
-	$('.UserproductsDetails').children().slice(0, show_per_page).css('display', 'block');
-	$("#pageCount").show();
-	$("#display").hide();
- }
-	$scope.previous = function(){
-		$scope.new_page = parseInt($('#current_page').val()) - 1;
-		if($('.active_page').prev('.page_link').length==true){
-			go_to_page($scope.new_page);
-		}
-	}
-
-	$scope.next = function(){
-		$scope.new_page = parseInt($('#current_page').val()) + 1;
-		if($('.active_page').next('.page_link').length==true){
-			go_to_page($scope.new_page);
-		}
-	}
-
-	$scope.go_to_page=function(page_num){
+    $scope.ShowDetails = function(pid){
+		$scope.ProductItemDetails = [];
+		$scope.productDisplay = false;
+		$scope.category = false;
+		$scope.ProductDetails = true;
+		$scope.index = 0;
 		
-		$scope.show_per_page = parseInt($('#show_per_page').val());
-		$scope.start_from = page_num * $scope.show_per_page;
-		$scope.end_on = $scope.start_from + $scope.show_per_page;
-		$('.UserproductsDetails').children().css('display', 'none').slice($scope.start_from, $scope.end_on).css('display', 'block');
-		$('.page_link[longdesc=' + page_num +']').addClass('active_page').siblings('.active_page').removeClass('active_page');
-		$('#current_page').val(page_num);
-		$('#pageCount').html("Current Page: "+parseInt(page_num+1));
-	}
+		for(var i=0;i<$scope.productsData.length;i++){
+			if($scope.productsData[i].pid == pid){
+				$scope.ProductItemDetails[$scope.index] = $scope.productsData[i];
+				$scope.index++;
+			}
+		}
+		console.log($scope.ProductItemDetails);
+	}	
 	
 	$scope.ShowCategory = function(category){
+		$scope.ProductCategory = category;
 		$scope.productDisplay = false;
 		$scope.category = true;
+		$scope.ProductDetails = false;
 		$scope.FilterData = [];
 		$scope.index = 0;
 		$scope.DataErr = false;
+		$scope.DataSuccess = false;
 		for(var i=0;i<$scope.productsData.length;i++){
 			if($scope.productsData[i].productcategory == category){
 				$scope.FilterData[$scope.index] = $scope.productsData[i];
@@ -273,15 +209,33 @@ blueLoungeApp.controller("productsController",["$scope","$http","$location","$ro
 		if($scope.FilterData.length<=0){
 			$scope.DataErr = true;;
 			$scope.NoData="Sorry No Products Available for "+category+" :(";
+		}else{
+			$scope.DataSuccess = true;
 		}
-		console.log($scope.FilterData);
+		//console.log($scope.FilterData);
 	}
 	$scope.Back = function(){
 		$scope.productDisplay = true;
 		$scope.category = false;
+		$scope.ProductDetails = false;
+		$scope.getAllProducts();
 	}
 	
 }]);
+
+blueLoungeApp.directive('ngElevateZoom', function() {
+  return {
+    restrict: 'A',
+    link: function(scope, element, attrs) {
+      element.attr('data-zoom-image',attrs.zoomImage);
+      $(element).elevateZoom();
+    }
+  };
+});
+
+$( document ).ready(function() {
+    $('#native').elevateZoom();
+});
 
 blueLoungeApp.controller("adminLoginController",["$scope","$http","$location","$rootScope",function($scope,$http,$location,$rootScope){
 	$scope.adminLoginAuth = function(){

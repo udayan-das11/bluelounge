@@ -48,6 +48,20 @@ div.col-sm-9 div {
   width: 100%;
   height: 40px;
 }
+.pegCenter {
+    height: 10%;
+    margin: auto;
+    position: relative;
+    width: 50%;
+}
+.searhPage {
+    background-color: #f8f8f8 !important;
+    border-radius: 6px !important;
+    color: black !important;
+    left: 37%;
+    position: relative;
+    width: 34% !important;
+}
 #page_navigation{
 	width: 92%;
 	margin-top: 2%;
@@ -88,7 +102,7 @@ div.col-sm-9 div {
     background: #f8f8f8 none repeat scroll 0 0;
     border-radius: 10px;
     float: left;
-    height: 85%;
+    height: 80%;
     left: 2%;
     position: relative;
     width: 20%;
@@ -166,7 +180,7 @@ div.col-sm-9 div {
     background: #f8f8f8 none repeat scroll 0 0;
     border-radius: 9px;
     float: left;
-    height: 85%;
+    height: 80%;
     left: 4%;
     position: relative;
     width: 74%;
@@ -183,10 +197,29 @@ div.col-sm-9 div {
 	background: #f8f8f8 none repeat scroll 0 0;
     border-radius: 9px;
     float: left;
-    height: 85%;
+    height: 80%;
     left: 4%;
     position: relative;
     width: 74%;
+}
+.ProductDetails{
+	background: #f8f8f8 none repeat scroll 0 0;
+    border-radius: 9px;
+    float: left;
+    height: 80%;
+    left: 4%;
+    position: relative;
+    width: 74%;
+}
+.ProductItemData{
+	width: 50%;
+	height: auto;
+	color: #000;
+	margin-left: 50px;
+	border: 1px solid #ccc;
+	margin-top: 5%;
+	border-radius: 5px;
+	padding-left: 2%;
 }
 #DataErr{
 	width: 80%;
@@ -195,6 +228,10 @@ div.col-sm-9 div {
     color: red;
     text-align: center;
     margin: auto;
+}
+#DataSuccess{
+	color:green;
+	margin-left:25%;
 }
 .navbar .container .navbar-header .navbar-brand #logo {
     position: relative;
